@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merchant-deployment
+  labels:
+    app: merchant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: merchant
+  template:
+    metadata:
+      labels:
+        app: merchant
+    spec:
+      containers:
+        - name: merchant
+          image: emhusnan/mdd-merchant-service:v0.0.2-dev
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: merchant-service
+spec:
+  selector:
+    app: merchant
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: merchant-ingress
+  annotations:
+    plugins.konghq.com: cors
+spec:
+  rules:
+    - host: api-staging.mdd.co.id
+      http:
+        paths:
+          - path: /merchant
+            backend:
+              serviceName: merchant-service
+              servicePort: 80
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: merchant-ingress
+route:
+  strip_path: true
+
