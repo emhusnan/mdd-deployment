@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: device-deployment
+  name: wallet-deployment
   labels:
-    app: device
+    app: wallet
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: device
+      app: wallet
   template:
     metadata:
       labels:
-        app: device
+        app: wallet
     spec:
       containers:
-        - name: device
-          image: emhusnan/mdd-device-service:v0.0.1-staging
+        - name: wallet
+          image: emhusnan/mdd-wallet-service:v0.0.1-staging
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: device-service
+  name: wallet-service
 spec:
   selector:
-    app: device
+    app: wallet
   ports:
     - protocol: TCP
       port: 80
@@ -35,7 +35,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: device-ingress
+  name: wallet-ingress
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -43,15 +43,15 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /device
+          - path: /wallet
             backend:
-              serviceName: device-service
+              serviceName: wallet-service
               servicePort: 80
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: device-ingress
+  name: wallet-ingress
 route:
   strip_path: true
 

@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: device-deployment
+  name: unlock-aar-deployment
   labels:
-    app: device
+    app: unlock-aar
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: device
+      app: unlock-aar
   template:
     metadata:
       labels:
-        app: device
+        app: unlock-aar
     spec:
       containers:
-        - name: device
-          image: emhusnan/mdd-device-service:v0.0.1-staging
+        - name: unlock-aar
+          image: emhusnan/mdd-unlock-aar-service:v0.0.1-staging
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: device-service
+  name: unlock-aar-service
 spec:
   selector:
-    app: device
+    app: unlock-aar
   ports:
     - protocol: TCP
       port: 80
@@ -35,7 +35,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: device-ingress
+  name: unlock-aar-ingress
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -43,15 +43,15 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /device
+          - path: /unlock-aar
             backend:
-              serviceName: device-service
+              serviceName: unlock-aar-service
               servicePort: 80
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: device-ingress
+  name: unlock-aar-ingress
 route:
   strip_path: true
 

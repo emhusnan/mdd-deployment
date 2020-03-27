@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: device-deployment
+  name: h2h-deployment
   labels:
-    app: device
+    app: h2h
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: device
+      app: h2h
   template:
     metadata:
       labels:
-        app: device
+        app: h2h
     spec:
       containers:
-        - name: device
-          image: emhusnan/mdd-device-service:v0.0.1-staging
+        - name: h2h
+          image: emhusnan/mdd-h2h-service:v0.0.1-staging
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: device-service
+  name: h2h-service
 spec:
   selector:
-    app: device
+    app: h2h
   ports:
     - protocol: TCP
       port: 80
@@ -35,7 +35,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: device-ingress
+  name: h2h-ingress
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -43,15 +43,15 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /device
+          - path: /h2h
             backend:
-              serviceName: device-service
+              serviceName: h2h-service
               servicePort: 80
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: device-ingress
+  name: h2h-ingress
 route:
   strip_path: true
 
