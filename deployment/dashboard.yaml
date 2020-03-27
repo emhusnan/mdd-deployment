@@ -40,10 +40,10 @@ metadata:
     plugins.konghq.com: cors
 spec:
   rules:
-    - host: api-staging.mdd.co.id
+    - host: dashboard-staging.mdd.co.id
       http:
         paths:
-          - path: /dashboard
+          - path: /
             backend:
               serviceName: dashboard-service
               servicePort: 80
