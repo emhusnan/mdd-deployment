@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: device-deployment
+  labels:
+    app: device
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: device
+  template:
+    metadata:
+      labels:
+        app: device
+    spec:
+      containers:
+        - name: device
+          image: emhusnan/mdd-device-service:v0.0.2-dev
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: device-service
+spec:
+  selector:
+    app: device
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: device-ingress
+  annotations:
+    plugins.konghq.com: cors
+spec:
+  rules:
+    - host: api-staging.mdd.co.id
+      http:
+        paths:
+          - path: /device
+            backend:
+              serviceName: device-service
+              servicePort: 80
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: device-ingress
+route:
+  strip_path: true
+
