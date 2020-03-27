@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-deployment
+  labels:
+    app: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      containers:
+        - name: dashboard
+          image: emhusnan/mdd-dashboard-service:v0.0.1-staging
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-service
+spec:
+  selector:
+    app: dashboard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dashboard-ingress
+  annotations:
+    plugins.konghq.com: cors
+spec:
+  rules:
+    - host: api-staging.mdd.co.id
+      http:
+        paths:
+          - path: /dashboard
+            backend:
+              serviceName: dashboard-service
+              servicePort: 80
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: dashboard-ingress
+route:
+  strip_path: true
+
