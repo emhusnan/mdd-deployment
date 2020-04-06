@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unik-lite-deployment
+  labels:
+    app: unik-lite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unik-lite
+  template:
+    metadata:
+      labels:
+        app: unik-lite
+    spec:
+      containers:
+        - name: unik-lite
+          image: emhusnan/mdd-unik-lite-service:v0.0.2-staging
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unik-lite-service
+spec:
+  selector:
+    app: unik-lite
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: unik-lite-ingress
+  annotations:
+    plugins.konghq.com: cors
+spec:
+  rules:
+    - host: api-staging.mdd.co.id
+      http:
+        paths:
+          - path: /unik-lite
+            backend:
+              serviceName: unik-lite-service
+              servicePort: 80
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: unik-lite-ingress
+route:
+  strip_path: true
+
