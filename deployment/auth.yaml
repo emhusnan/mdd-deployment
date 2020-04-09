@@ -43,19 +43,10 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /auth/v1/
+          - path: /v1/auth
             backend:
               serviceName: auth-service
               servicePort: 80
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
-  name: url-rewrite
-config:
-  replace:
-    uri: "/v1/auth/$(uri_captures[1])"
-plugin: request-transformer
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
