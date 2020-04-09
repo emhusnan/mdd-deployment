@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /h2h
+          - path: /v1/h2h
             backend:
               serviceName: h2h-service
               servicePort: 80

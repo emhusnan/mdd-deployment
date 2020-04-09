@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /unik-lite
+          - path: /v1/unik-lite
             backend:
               serviceName: unik-lite-service
               servicePort: 80

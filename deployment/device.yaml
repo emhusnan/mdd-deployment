@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /device
+          - path: /v1/device
             backend:
               serviceName: device-service
               servicePort: 80
