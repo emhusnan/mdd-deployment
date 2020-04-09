@@ -43,10 +43,15 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /auth/v1
+          - path: auth/v1/
             backend:
               serviceName: auth-service
               servicePort: 80
+          - path: /v1/auth
+            backend:
+              serviceName: auth-service
+              servicePort: 80
+
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
