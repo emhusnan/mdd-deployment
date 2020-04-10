@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /auth
+          - path: /auth-service
             backend:
               serviceName: auth-service
               servicePort: 80

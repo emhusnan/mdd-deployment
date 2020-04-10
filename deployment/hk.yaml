@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /hk
+          - path: /hk-service
             backend:
               serviceName: hk-service
               servicePort: 80
