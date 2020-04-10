@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: emhusnan/mdd-auth-service:v0.0.3-staging
+          image: emhusnan/mdd-auth-service:v0.0.4-staging
           ports:
             - containerPort: 80
 ---
@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /v1/auth
+          - path: /auth
             backend:
               serviceName: auth-service
               servicePort: 80

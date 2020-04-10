@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /v1/merchant
+          - path: /merchant
             backend:
               serviceName: merchant-service
               servicePort: 80

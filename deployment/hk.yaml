@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hk
-          image: emhusnan/mdd-hk-service:v0.0.1-staging
+          image: emhusnan/mdd-hk-service:v0.0.2-staging
           ports:
             - containerPort: 80
 ---
@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /v1/hk
+          - path: /hk
             backend:
               serviceName: hk-service
               servicePort: 80
