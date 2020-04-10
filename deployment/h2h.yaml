@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: h2h
-          image: emhusnan/mdd-h2h-service:v0.0.1-staging
+          image: emhusnan/mdd-h2h-service:v0.0.2-staging
           ports:
             - containerPort: 80
 ---
@@ -43,7 +43,7 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /v1/h2h
+          - path: /h2h
             backend:
               serviceName: h2h-service
               servicePort: 80
