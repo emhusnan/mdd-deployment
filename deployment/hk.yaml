@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hk-deployment
+  labels:
+    app: hk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hk
+  template:
+    metadata:
+      labels:
+        app: hk
+    spec:
+      containers:
+        - name: hk
+          image: emhusnan/mdd-hk-service:v0.0.3-staging
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hk-service
+spec:
+  selector:
+    app: hk
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hk-ingress
+  annotations:
+    plugins.konghq.com: cors
+spec:
+  rules:
+    - host: api-staging.mdd.co.id
+      http:
+        paths:
+          - path: /v1/hk
+            backend:
+              serviceName: hk-service
+              servicePort: 80
+
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: hk-ingress
+route:
+  strip_path: true
+
