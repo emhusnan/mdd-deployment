@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: emhusnan/mdd-auth-service:v0.0.4-staging
+          image: emhusnan/mdd-auth-service:v0.0.5-staging
           ports:
             - containerPort: 80
 ---
