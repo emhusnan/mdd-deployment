@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dashboard
-          image: emhusnan/mdd-dashboard-service:v0.0.2-staging
+          image: emhusnan/mdd-dashboard-service:v0.0.1-dev
           ports:
             - containerPort: 80
 ---
@@ -40,7 +40,7 @@ metadata:
     plugins.konghq.com: cors
 spec:
   rules:
-    - host: dashboard-staging.mdd.co.id
+    - host: dashboard-dev.mdd.co.id
       http:
         paths:
           - path: /

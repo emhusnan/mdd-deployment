@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: merchant
-          image: emhusnan/mdd-merchant-service:v0.0.5-staging
+          image: emhusnan/mdd-merchant-service:v0.0.1-dev
           ports:
             - containerPort: 80
 ---
@@ -40,7 +40,7 @@ metadata:
     plugins.konghq.com: cors
 spec:
   rules:
-    - host: api-staging.mdd.co.id
+    - host: api-dev.mdd.co.id
       http:
         paths:
           - path: /merchant-service
