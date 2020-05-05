@@ -53,6 +53,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
   name: auth-ingress
+  namespace: dev
 route:
   strip_path: true
 
