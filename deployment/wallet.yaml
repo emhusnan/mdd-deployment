@@ -52,6 +52,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
   name: wallet-ingress
+  namespace: dev
 route:
   strip_path: true
 
