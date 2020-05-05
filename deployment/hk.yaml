@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hk-deployment
+  name: hk-deployment-dev
   labels:
     app: hk
 spec:
