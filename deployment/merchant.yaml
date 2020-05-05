@@ -48,7 +48,7 @@ spec:
         paths:
           - path: /merchant-service
             backend:
-              serviceName: merchant-service
+              serviceName: merchant-service-dev
               servicePort: 80
 ---
 apiVersion: configuration.konghq.com/v1
