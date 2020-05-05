@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wallet-deployment-dev
+  namespace: dev
   labels:
     app: wallet
 spec:
@@ -23,7 +24,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wallet-service
+  name: wallet-service-dev
+  namespace: dev
 spec:
   selector:
     app: wallet
@@ -35,7 +37,8 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: wallet-ingress
+  name: wallet-ingress-dev
+  namespace: dev
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -51,7 +54,7 @@ spec:
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: wallet-ingress
+  name: wallet-ingress-dev
   namespace: dev
 route:
   strip_path: true

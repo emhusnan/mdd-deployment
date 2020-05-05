@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-deployment-dev
+  namespace: dev
   labels:
     app: auth
 spec:
@@ -23,7 +24,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service
+  name: auth-service-dev
+  namespace: dev
 spec:
   selector:
     app: auth
@@ -35,7 +37,8 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: auth-ingress
+  name: auth-ingress-dev
+  namespace: dev
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -45,14 +48,14 @@ spec:
         paths:
           - path: /auth-service
             backend:
-              serviceName: auth-service
+              serviceName: auth-service-
               servicePort: 80
 
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: auth-ingress
+  name: auth-ingress-dev
   namespace: dev
 route:
   strip_path: true

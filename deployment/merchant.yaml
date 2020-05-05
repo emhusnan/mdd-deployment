@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: merchant-deployment-dev
+  namespace: dev
   labels:
     app: merchant
 spec:
@@ -23,7 +24,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: merchant-service
+  name: merchant-service-dev
+  namespace: dev
 spec:
   selector:
     app: merchant
@@ -35,7 +37,8 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: merchant-ingress
+  name: merchant-ingress-dev
+  namespace: dev
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -51,7 +54,7 @@ spec:
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: merchant-ingress
+  name: merchant-ingress-dev
   namespace: dev
 route:
   strip_path: true

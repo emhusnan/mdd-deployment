@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hk-deployment-dev
+  namespace: dev
   labels:
     app: hk
 spec:
@@ -23,7 +24,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hk-service
+  name: hk-service-dev
+  namespace: dev
 spec:
   selector:
     app: hk
@@ -35,7 +37,8 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: hk-ingress
+  name: hk-ingress-dev
+  namespace: dev
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -52,7 +55,7 @@ spec:
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: hk-ingress
+  name: hk-ingress-dev
   namespace: dev
 route:
   strip_path: true
