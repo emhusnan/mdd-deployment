@@ -52,6 +52,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
   name: merchant-ingress
+  namespace: dev
 route:
   strip_path: true
 
