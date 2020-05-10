@@ -4,16 +4,16 @@ metadata:
   name: wallet-deployment-dev
   namespace: dev
   labels:
-    app: wallet
+    app: wallet-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wallet
+      app: wallet-dev
   template:
     metadata:
       labels:
-        app: wallet
+        app: wallet-dev
     spec:
       containers:
         - name: wallet
@@ -28,7 +28,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    app: wallet
+    app: wallet-dev
   ports:
     - protocol: TCP
       port: 80

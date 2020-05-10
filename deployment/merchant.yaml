@@ -4,19 +4,19 @@ metadata:
   name: merchant-deployment-dev
   namespace: dev
   labels:
-    app: merchant
+    app: merchant-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: merchant
+      app: merchant-dev
   template:
     metadata:
       labels:
-        app: merchant
+        app: merchant-dev
     spec:
       containers:
-        - name: merchant
+        - name: merchant-dev
           image: emhusnan/mdd-merchant-service:v0.0.2-dev
           ports:
             - containerPort: 80
@@ -28,7 +28,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    app: merchant
+    app: merchant-dev
   ports:
     - protocol: TCP
       port: 80
@@ -55,6 +55,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
   name: merchant-ingress-dev
+  namespace: dev
 route:
   strip_path: true
 

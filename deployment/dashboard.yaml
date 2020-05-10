@@ -4,19 +4,19 @@ metadata:
   name: dashboard-deployment-dev
   namespace: dev
   labels:
-    app: dashboard
+    app: dashboard-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dashboard
+      app: dashboard-dev
   template:
     metadata:
       labels:
-        app: dashboard
+        app: dashboard-dev
     spec:
       containers:
-        - name: dashboard
+        - name: dashboard-dev
           image: emhusnan/mdd-dashboard-service:v0.0.1-dev
           ports:
             - containerPort: 80
@@ -28,7 +28,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    app: dashboard
+    app: dashboard-dev
   ports:
     - protocol: TCP
       port: 80
@@ -48,7 +48,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: dashboard-service
+              serviceName: dashboard-service-dev
               servicePort: 80
 ---
 apiVersion: configuration.konghq.com/v1

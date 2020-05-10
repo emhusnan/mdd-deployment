@@ -4,16 +4,16 @@ metadata:
   name: auth-deployment-dev
   namespace: dev
   labels:
-    app: auth
+    app: auth-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: auth-dev
   template:
     metadata:
       labels:
-        app: auth
+        app: auth-dev
     spec:
       containers:
         - name: auth
@@ -28,7 +28,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    app: auth
+    app: auth-dev
   ports:
     - protocol: TCP
       port: 80
@@ -47,7 +47,7 @@ spec:
         paths:
           - path: /auth-service
             backend:
-              serviceName: auth-service
+              serviceName: auth-service-dev
               servicePort: 80
 
 ---
@@ -55,6 +55,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
   name: auth-ingress-dev
+  namespace: dev
 route:
   strip_path: true
 

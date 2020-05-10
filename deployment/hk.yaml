@@ -4,19 +4,19 @@ metadata:
   name: hk-deployment-dev
   namespace: dev
   labels:
-    app: hk
+    app: hk-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hk
+      app: hk-dev
   template:
     metadata:
       labels:
-        app: hk
+        app: hk-dev
     spec:
       containers:
-        - name: hk
+        - name: hk-dev
           image: emhusnan/mdd-hk-service:v0.0.1-dev
           ports:
             - containerPort: 80
@@ -28,7 +28,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    app: hk
+    app: hk-dev
   ports:
     - protocol: TCP
       port: 80
@@ -48,7 +48,7 @@ spec:
         paths:
           - path: /hk-service
             backend:
-              serviceName: hk-service
+              serviceName: hk-service-dev
               servicePort: 80
 
 ---
