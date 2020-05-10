@@ -38,6 +38,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: auth-ingress-dev
+  namespace: dev
   annotations:
     plugins.konghq.com: cors
 spec:
