@@ -38,6 +38,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: wallet-ingress-dev
+  namespace: dev
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -47,13 +48,14 @@ spec:
         paths:
           - path: /wallet-service
             backend:
-              serviceName: wallet-service
+              serviceName: wallet-service-dev
               servicePort: 80
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
   name: wallet-ingress-dev
+  namespace: dev
 route:
   strip_path: true
 
