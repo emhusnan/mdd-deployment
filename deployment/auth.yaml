@@ -16,7 +16,7 @@ spec:
         app: auth-dev
     spec:
       containers:
-        - name: auth
+        - name: auth-dev
           image: emhusnan/mdd-auth-service:v0.0.2-dev
           ports:
             - containerPort: 80
