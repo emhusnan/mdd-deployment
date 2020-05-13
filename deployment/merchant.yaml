@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: merchant
-          image: emhusnan/mdd-merchant-service:v0.0.2-prod
+          image: emhusnan/mdd-merchant-service:v0.0.3-prod
           ports:
             - containerPort: 80
 ---
