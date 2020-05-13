@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: wallet
-          image: emhusnan/mdd-wallet-service:v0.0.6-staging
+          image: emhusnan/mdd-wallet-service:v0.0.1-prod
           ports:
             - containerPort: 80
 ---
@@ -40,7 +40,7 @@ metadata:
     plugins.konghq.com: cors
 spec:
   rules:
-    - host: api-staging.mdd.co.id
+    - host: api-prod.mdd.co.id
       http:
         paths:
           - path: /wallet-service

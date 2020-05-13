@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hk
-          image: emhusnan/mdd-hk-service:v0.0.10-staging
+          image: emhusnan/mdd-hk-service:v0.0.1-prod
           ports:
             - containerPort: 80
 ---
@@ -40,7 +40,7 @@ metadata:
     plugins.konghq.com: cors
 spec:
   rules:
-    - host: api-staging.mdd.co.id
+    - host: api-prod.mdd.co.id
       http:
         paths:
           - path: /hk-service
