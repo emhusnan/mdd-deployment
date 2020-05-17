@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aar-deployment-dev
+  namespace: dev
+  labels:
+    app: aar-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aar-dev
+  template:
+    metadata:
+      labels:
+        app: aar-dev
+    spec:
+      containers:
+        - name: aar-dev
+          image: emhusnan/mdd-aar-service:v0.0.1-dev
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aar-service-dev
+  namespace: dev
+spec:
+  selector:
+    app: aar-dev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: aar-ingress-dev
+  namespace: dev
+  annotations:
+    plugins.konghq.com: cors
+spec:
+  rules:
+    - host: api-dev.mdd.co.id
+      http:
+        paths:
+          - path: /aar-service
+            backend:
+              serviceName: aar-service-dev
+              servicePort: 80
+
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: aar-ingress-dev
+  namespace: dev
+route:
+  strip_path: true
+
