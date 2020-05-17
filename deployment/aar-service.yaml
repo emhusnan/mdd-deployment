@@ -1,32 +1,32 @@
-kapiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: device-deployment
+  name: aar-deployment
   labels:
-    app: device
+    app: aar
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: device
+      app: aar
   template:
     metadata:
       labels:
-        app: device
+        app: aar
     spec:
       containers:
-        - name: device
-          image: emhusnan/mdd-device-service:v0.0.1-staging
+        - name: aar
+          image: emhusnan/mdd-aar-service:v0.0.1-staging
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: device-service
+  name: aar-service
 spec:
   selector:
-    app: device
+    app: aar
   ports:
     - protocol: TCP
       port: 80
@@ -35,7 +35,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: device-ingress
+  name: aar-ingress
   annotations:
     plugins.konghq.com: cors
 spec:
@@ -43,16 +43,16 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /device-service
+          - path: /aar-service
             backend:
-              serviceName: device-service
+              serviceName: aar-service
               servicePort: 80
 
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
 metadata:
-  name: device-ingress
+  name: aar-ingress
 route:
   strip_path: true
 
