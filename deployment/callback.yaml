@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: callback-deployment-dev
+  namespace: dev
+  labels:
+    app: callback-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: callback-dev
+  template:
+    metadata:
+      labels:
+        app: callback-dev
+    spec:
+      containers:
+        - name: callback-dev
+          image: emhusnan/mdd-callback-service:v0.0.2-dev
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: callback-service-dev
+  namespace: dev
+spec:
+  selector:
+    app: callback-dev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: callback-ingress-dev
+  namespace: dev
+  annotations:
+    plugins.konghq.com: cors
+spec:
+  rules:
+    - host: api-dev.mdd.co.id
+      http:
+        paths:
+          - path: /callback-service
+            backend:
+              serviceName: callback-service-dev
+              servicePort: 80
+
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: callback-ingress-dev
+  namespace: dev
+route:
+  strip_path: true
+
