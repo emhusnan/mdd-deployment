@@ -43,10 +43,11 @@ spec:
     - host: api-staging.mdd.co.id
       http:
         paths:
-          - path: /v1/unik-lite
+          - path: /unik-lite-service
             backend:
               serviceName: unik-lite-service
               servicePort: 80
+
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
@@ -54,4 +55,3 @@ metadata:
   name: unik-lite-ingress
 route:
   strip_path: true
-
