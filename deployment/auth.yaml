@@ -39,6 +39,9 @@ kind: Ingress
 metadata:
   name: auth-ingress-dev
   namespace: dev
+  annotations:
+      kubernetes.io/ingress.class: kong
+      plugins.konghq.com: dev-kong-cors
 spec:
   rules:
     - host: api-dev.mdd.co.id
@@ -59,4 +62,3 @@ metadata:
       plugins.konghq.com: cors
 route:
   strip_path: true
-
