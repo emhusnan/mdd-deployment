@@ -39,8 +39,6 @@ kind: Ingress
 metadata:
   name: auth-ingress-dev
   namespace: dev
-  annotations:
-    plugins.konghq.com: cors
 spec:
   rules:
     - host: api-dev.mdd.co.id
@@ -57,6 +55,8 @@ kind: KongIngress
 metadata:
   name: auth-ingress-dev
   namespace: dev
+  annotations:
+      plugins.konghq.com: cors
 route:
   strip_path: true
 
