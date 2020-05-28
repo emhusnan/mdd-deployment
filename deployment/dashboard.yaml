@@ -56,6 +56,8 @@ kind: KongIngress
 metadata:
   name: dashboard-ingress-dev
   namespace: dev
+  annotations:
+      plugins.konghq.com: cors
 route:
   strip_path: true
 
