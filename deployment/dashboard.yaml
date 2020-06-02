@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dashboard
-          image: emhusnan/mdd-dashboard-service:v0.0.1-prod
+          image: emhusnan/mdd-dashboard-service:v0.0.2-prod
           ports:
             - containerPort: 80
 ---
