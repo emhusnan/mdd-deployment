@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: unik-lite
-          image: emhusnan/mdd-unik-lite-service:v0.0.1-dev
+          image: emhusnan/mdd-unik-lite-service:v0.0.1-prod
           ports:
             - containerPort: 80
 ---
@@ -40,13 +40,14 @@ metadata:
     plugins.konghq.com: cors
 spec:
   rules:
-    - host: api-dev.mdd.co.id
+    - host: api-prod.mdd.co.id
       http:
         paths:
-          - path: /v1/unik-lite
+          - path: /unik-lite-service
             backend:
               serviceName: unik-lite-service
               servicePort: 80
+
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongIngress
@@ -54,4 +55,3 @@ metadata:
   name: unik-lite-ingress
 route:
   strip_path: true
-
