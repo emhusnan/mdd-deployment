@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: unik-lite-dev
-          image: emhusnan/mdd-unik-lite-service:v0.0.2-dev
+          image: emhusnan/mdd-unik-lite-service:v0.0.1-dev
           ports:
             - containerPort: 80
 ---
