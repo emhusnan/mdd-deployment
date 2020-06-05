@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: wallet
-          image: emhusnan/mdd-wallet-service:v0.0.3-dev
+          image: emhusnan/mdd-wallet-service:v0.0.4-dev
           ports:
             - containerPort: 80
 ---
