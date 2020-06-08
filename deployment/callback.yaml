@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: callback-dev
-          image: emhusnan/mdd-callback-service:v0.0.2-dev
+          image: emhusnan/mdd-callback-service:v0.0.3-dev
           ports:
             - containerPort: 80
 ---
