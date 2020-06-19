@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hk-dev
-          image: emhusnan/mdd-hk-service:v0.0.5-dev
+          image: emhusnan/mdd-hk-service:v0.0.6-dev
           ports:
             - containerPort: 80
 ---
